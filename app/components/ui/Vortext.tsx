@@ -59,7 +59,7 @@ export const Vortex = (props: VortexProps) => {
       const ctx = canvas.getContext("2d");
 
       if (ctx) {
-        resize(canvas, ctx);
+        resize(canvas);
         initParticles();
         draw(canvas, ctx);
       }
@@ -119,14 +119,14 @@ export const Vortex = (props: VortexProps) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-     const i2 = 1 + i;
-     const i3 = 2 + i;
-     const i4 = 3 + i;
-     const i5 = 4 + i;
-     const i6 = 5 + i;
-     const i7 = 6 + i;
-     const i8 = 7 + i;
-     const i9 = 8 + i;
+    const i2 = 1 + i;
+    const i3 = 2 + i;
+    const i4 = 3 + i;
+    const i5 = 4 + i;
+    const i6 = 5 + i;
+    const i7 = 6 + i;
+    const i8 = 7 + i;
+    const i9 = 8 + i;
 
     const x = particleProps[i];
     const y = particleProps[i2];
@@ -151,7 +151,9 @@ export const Vortex = (props: VortexProps) => {
     particleProps[i4] = vy;
     particleProps[i5] = life;
 
-    (checkBounds(x, y, canvas) || life > ttl) && initParticle(i);
+    if (checkBounds(x, y, canvas) || life > ttl) {
+      initParticle(i);
+    }
   };
 
   const drawParticle = (
@@ -183,7 +185,6 @@ export const Vortex = (props: VortexProps) => {
 
   const resize = (
     canvas: HTMLCanvasElement,
-    ctx?: CanvasRenderingContext2D
   ) => {
     const { innerWidth, innerHeight } = window;
 
@@ -227,7 +228,7 @@ export const Vortex = (props: VortexProps) => {
       const canvas = canvasRef.current;
       const ctx = canvas?.getContext("2d");
       if (canvas && ctx) {
-        resize(canvas, ctx);
+        resize(canvas);
       }
     });
   }, []);
