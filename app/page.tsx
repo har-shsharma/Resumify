@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Lamp } from "./components/ui/Lamp";
 
 export default function Home() {

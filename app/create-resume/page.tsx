@@ -3,8 +3,23 @@ import { motion } from 'motion/react';
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+interface Block {
+  subheading: string;
+  date: string;
+  content: string;
+  bullets: string[];
+}
+
+interface Section {
+  id: string;
+  heading: string;
+  alignment: 'left' | 'center';
+  headingAlignment: 'left' | 'center';
+  blocks: Block[];
+}
+
 function Page() {
-  const [sections, setSections] = useState([
+  const [sections, setSections] = useState<Section[]>([
     {
       id: uuidv4(),
       heading: '',
@@ -39,7 +54,10 @@ function Page() {
     value: string
   ) => {
     const updated = [...sections];
-    (updated[sectionIndex].blocks[blockIndex] as any)[field] = value;
+    const block = updated[sectionIndex].blocks[blockIndex];
+    if (field === 'subheading' || field === 'date' || field === 'content') {
+      block[field] = value;
+    }
     setSections(updated);
   };
 
@@ -62,11 +80,23 @@ function Page() {
 
 
 
-  const handleSectionChange = (index: number, field: string, value: string) => {
+  const handleSectionChange = (
+    index: number,
+    field: keyof Section,
+    value: string
+  ) => {
     const updated = [...sections];
-    (updated[index] as any)[field] = value;
+
+    if (field === 'heading' || field === 'alignment' || field === 'headingAlignment') {
+      updated[index] = {
+        ...updated[index],
+        [field]: value as Section[typeof field],
+      };
+    }
+
     setSections(updated);
   };
+
 
 
   const addSection = () => {

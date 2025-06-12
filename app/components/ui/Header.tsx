@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
 
 function Header() {
     const [isOpen, setIsOpen] = useState(false);
@@ -16,9 +17,9 @@ function Header() {
                     duration: 0.8,
                     ease: "easeInOut",
                 }}>
-                <a href="/" className="text-[24px] font-medium tracking-wide text-white/60 hover:text-white transition cursor-pointer">
+                <Link href="/" className="text-[24px] font-medium tracking-wide text-white/60 hover:text-white transition cursor-pointer">
                     RESUMIFY
-                </a>
+                </Link>
             </motion.div>
 
             <nav className="hidden md:flex gap-6 text-[24px] font-medium text-white/60">
@@ -30,7 +31,7 @@ function Header() {
                         duration: 0.8,
                         ease: "easeInOut",
                     }}>
-                    <a href="/create-resume" className="hover:text-white transition">Create</a>
+                    <Link href="/create-resume" className="hover:text-white transition">Create</Link>
                 </motion.div>
                 <motion.div
                     initial={{ opacity: 0, x: -100 }}
@@ -40,7 +41,7 @@ function Header() {
                         duration: 0.8,
                         ease: "easeInOut",
                     }}>
-                    <a href="/about-us" className="hover:text-white transition">About Us</a>
+                    <Link href="/about-us" className="hover:text-white transition">About Us</Link>
                 </motion.div>
             </nav>
 
@@ -73,8 +74,8 @@ function Header() {
                     exit={{ opacity: 0, y: -20 }}
                     className="absolute top-full left-0 w-full flex flex-col items-center py-4 md:hidden backdrop-blur"
                 >
-                    <a href="/create-resume" className="py-2 text-[24px] font-medium text-white/60 hover:text-white transition">Create</a>
-                    <a href="/about-us" className="py-2 text-[24px] font-medium text-white/60 hover:text-white transition">About Us</a>
+                    <Link href="/create-resume" className="py-2 text-[24px] font-medium text-white/60 hover:text-white transition">Create</Link>
+                    <Link href="/about-us" className="py-2 text-[24px] font-medium text-white/60 hover:text-white transition">About Us</Link>
                 </motion.nav>
             )}
         </header>
